@@ -1,0 +1,22 @@
+# Power BI / Excel
+*.pbix
+*.xlsx
+*.csv
+~$*.xlsx
+*.bak
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# If you want to keep the data/ and dashboard/ folder but ignore specific files, you might adjust this.
+# But for a showcase, we typically DO commit the data and pbix if they are small enough (under 50MB).
+# So I will NOT ignore pbix and xlsx by default here, so you can push them to GitHub.
+
+# Ignore large data files (uncomment if data > 100MB)
+# data/*.xlsx
+# data/*.csv
+
+# Temporary files
+*.tmp
+*.log
