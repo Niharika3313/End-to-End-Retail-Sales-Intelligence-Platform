@@ -22,7 +22,7 @@ This project builds a complete data analytics pipeline for a retail business —
 
 The central question I wanted to answer was: **which channels, regions, and products are actually driving profitability, and where are the gaps?**
 
-I handled the data cleaning, SQL analysis, and dashboard development myself. The Python ETL script was built with AI assistance and is documented separately.
+I handled the data cleaning, SQL analysis, and dashboard development myself.
 
 ---
 
