@@ -1,128 +1,139 @@
 # End-to-End Retail Sales Intelligence Platform
 
-![Executive Overview Dashboard](images/executive_overview.png)
-
----
-
 ## Table of Contents
-- [Project Overview](#project-overview)
-- [Dataset](#dataset)
-- [Tools & Technologies](#tools--technologies)
-- [Pipeline Architecture](#pipeline-architecture)
-- [Repository Structure](#repository-structure)
-- [Dashboard Walkthrough](#dashboard-walkthrough)
-- [Key Insights](#key-insights)
-- [Limitations](#limitations)
+
+- [Project Background](#project-background)
+- [Executive Summary](#executive-summary)
+- [Insights Deep-Dive](#insights-deep-dive)
+  - [Overall Business Performance](#overall-business-performance)
+  - [Sales Channel Performance](#sales-channel-performance)
+  - [Regional Performance](#regional-performance)
+  - [Discount Impact on Profitability](#discount-impact-on-profitability)
+  - [Delivery & Supply Chain Performance](#delivery--supply-chain-performance)
+  - [Monthly Revenue Trends](#monthly-revenue-trends)
+- [Recommendations](#recommendations)
+- [Assumptions and Caveats](#assumptions-and-caveats)
 
 ---
 
-## Project Overview
+## Project Background
 
-This project builds a complete data analytics pipeline for a retail business — from raw Excel data through to an interactive Power BI dashboard analyzing over **$82.63 million in sales**.
+Every retail business collects thousands of sales records, but raw data alone doesn't explain what's actually driving performance. This project explores historical retail sales data to understand where revenue comes from, which sales channels are the most profitable, how discounts affect profit, and whether the supply chain is operating efficiently.
 
-The central question I wanted to answer was: **which channels, regions, and products are actually driving profitability, and where are the gaps?**
+## Executive Summary
 
-I handled the data cleaning, SQL analysis, and dashboard development myself.
+This analysis covers 7,987 retail transactions, generating $73.13M in revenue and $21.33M in profit, with an overall profit margin of 29.16%.
 
----
+The business performs consistently across regions and maintains healthy profitability overall. However, the analysis shows that the highest revenue doesn't always come from the most profitable sales channel. While In-Store sales generate the largest share of revenue, Wholesale delivers the highest profit margin, making it an efficient channel despite lower sales volume.
 
-## Dataset
+Discount analysis revealed that larger discounts significantly reduce profitability. Orders with discounts above 30% produce a profit margin of only 4.62%, compared to 33.3% for orders with discounts below 10%.
 
-- **Source:** Raw retail transaction data in Excel format
-- **Size:** 8,000+ rows
-- **Coverage:** Sales transactions across multiple regions, channels, and product categories
+Delivery performance remains consistent across sales channels and warehouses, suggesting a stable supply chain without major operational bottlenecks.
 
----
+Overall, the analysis highlights opportunities to improve pricing decisions, strengthen high-margin sales channels, and continue monitoring monthly revenue trends to support future business planning.
 
-## Tools & Technologies
-
-| Tool | Purpose |
-|------|---------|
-| Python (Pandas) | Data cleaning and ETL pipeline |
-| SQL (MySQL) | Data exploration and advanced analysis |
-| Power BI | Interactive dashboard and KPI reporting |
-| Excel | Raw data source and initial inspection |
-
----
-
-## Pipeline Architecture
-
-```
-[Excel Data]      Raw transactions (8,000+ rows)
-      ↓
-[Data Cleaning]   Pandas — deduplication, missing value handling,
-                  feature engineering
-      ↓
-[SQL Analysis]    Aggregations, window functions, cohort analysis,
-                  rolling averages, Pareto analysis
-      ↓
-[Data Modeling]   Star schema (fact and dimension tables)
-      ↓
-[Power BI]        Interactive dashboard with DAX measures
-      ↓
-[Key Insights]    Channel, regional, and product performance findings
-```
-
----
-
-## Repository Structure
-
-```
-├── docs/
-│   ├── Business_Requirements.md
-│   ├── Data_Dictionary.md
-│   └── DAX_Measures.md
-├── scripts/
-│   └── data_cleaning_pipeline.py
-├── notebooks/
-│   └── Exploratory_Data_Analysis.ipynb
-├── sql/
-│   ├── 01_table_creation.sql
-│   ├── 02_data_exploration.sql
-│   └── 03_advanced_analytics.sql
-├── dashboards/
-│   └── Dashboard_Export.pdf
-├── images/
-└── README.md
-```
-
-**Key files:**
-- `data_cleaning_pipeline.py` — Python script for cleaning and preparing raw data
-- `02_data_exploration.sql` — Aggregations and month-on-month growth using window functions
-- `03_advanced_analytics.sql` — Cohort analysis, 7-day rolling averages, and Pareto analysis
-- `DAX_Measures.md` — Documents the DAX formulas used in the Power BI dashboard
-
----
-
-## Dashboard Walkthrough
+## Dashboard Overview
 
 ### Executive Overview
-High-level KPIs covering total revenue, profitability, and top-performing products across all channels and regions.
 
 ![Executive Overview Dashboard](images/executive_overview.png)
 
-### Customer & Product Analysis
-Breakdown of margins by product category, key account performance, and cross-channel comparison.
+### Product Performance Overview
 
-![Customer & Product Dashboard](images/customer_analysis.png)
+![Product Performance Overview Dashboard](images/product_performance_overview.png)
 
----
+## Insights Deep-Dive
 
-## Key Insights
+### Overall Business Performance
 
-**1. In-store sales dominate revenue**
-Despite assumptions about digital growth, in-store transactions account for the vast majority of the $82.63M in total revenue — significantly outperforming both online and wholesale channels.
+- Analyzed 7,987 retail transactions spanning 2018–2020.
+- Generated $73.13M in total revenue and $21.33M in total profit.
+- Maintained an overall profit margin of 29.16%, indicating consistent profitability across the business.
+- Revenue was nearly 3.4× higher than total cost ($51.80M), providing a healthy return on sales.
 
-**2. Regional performance gap**
-The West region generates the highest sales volume, while the Northeast records the lowest. This gap suggests that regional factors — whether marketing, distribution, or customer mix — are worth investigating further.
+### Sales Channel Performance
 
-**3. High volume does not always mean high margin**
-Accessories generate strong sales volume and maintain solid margins. However, niche products like Cocktail Glasses show the highest overall profit margin at 40.27%, despite lower volume. This points to an opportunity in premium, low-volume product lines.
+- In-Store was the primary revenue driver, generating $30.09M (41.1%) of total revenue and $8.80M in profit.
+- Online contributed $21.70M in revenue with a 28.42% profit margin.
+- Wholesale generated the lowest revenue ($8.18M) but recorded the highest profit margin (30.28%), making it the most profitable channel per dollar of sales.
+- The results show that the highest revenue channel isn't necessarily the most profitable, highlighting opportunities to grow higher-margin channels.
 
----
+### Regional Performance
 
-## Limitations
+- The West region led overall performance with $25.71M in revenue and $7.52M in profit.
+- South followed closely, contributing $23.47M in revenue.
+- The Midwest achieved the highest regional profit margin (29.33%), despite generating lower revenue than the West and South.
+- Regional profit margins remained tightly grouped between 28.65%–29.33%, suggesting stable business performance across all locations.
 
-- The dataset does not include timestamps granular enough for day-level trend analysis in some queries
-- The ETL pipeline was built with AI assistance and is intended as a learning artifact rather than production code
-- The Power BI dashboard is exported as a PDF; live interactivity requires Power BI Desktop or Service
+### Discount Impact on Profitability
+
+Orders with 0–10% discounts generated:
+
+- 19,883 units sold
+- $42.86M revenue
+- 33.3% profit margin
+
+Increasing discounts consistently reduced profitability:
+
+- 10–20% → 28.32% margin
+- 20–30% → 21.35% margin
+- 30%+ → only 4.62% margin
+
+Discounts above 30% reduced profit by almost 86% compared to the lowest discount tier, despite generating $4.77M in revenue.
+
+The analysis suggests that larger discounts are not translating into proportional business value.
+
+### Delivery & Supply Chain Performance
+
+Average delivery time remained consistent across all sales channels:
+
+- Wholesale → 20.41 days
+- In-Store → 20.56 days
+- Distributor → 20.87 days
+- Online → 20.99 days
+
+Warehouse performance also remained stable, with average delivery times ranging from 20.39 to 21.04 days.
+
+The low variation across channels and warehouses indicates an efficient and well-balanced supply chain.
+
+### Monthly Revenue Trends
+
+Revenue experienced regular fluctuations throughout the three-year period, reflecting seasonal demand patterns.
+
+Strong growth was observed during November, December, and January, while declines were common during February, March, and October.
+
+The highest month-over-month growth reached 32.52% (July 2020), while the largest decline was 28.48% (February 2019).
+
+Despite monthly fluctuations, cumulative revenue steadily increased to $73.13M, demonstrating sustained business growth over time.
+
+## Recommendations
+
+### 1. Re-evaluate High Discount Policies
+
+Discounts above 30% reduce the profit margin to 4.62%, making them the least profitable pricing strategy.
+
+Consider capping discounts below 20% unless supported by specific promotional or inventory-clearing objectives.
+
+### 2. Continue Investing in the In-Store Channel
+
+In-Store sales generated the highest revenue ($30.09M) and total profit ($8.80M).
+
+Maintaining strong inventory availability and customer experience in this channel can help sustain overall business performance.
+
+### 3. Explore Growth Opportunities in Wholesale
+
+Although Wholesale contributed the lowest revenue, it achieved the highest profit margin (30.28%).
+
+Identifying opportunities to increase sales volume in this channel could improve overall profitability.
+
+### 4. Maintain Current Supply Chain Performance
+
+Average delivery time remained consistent at around 20–21 days across all sales channels and warehouses.
+
+Continue monitoring delivery performance to maintain operational efficiency and quickly identify any future bottlenecks.
+
+### 5. Monitor Seasonal Revenue Patterns
+
+Monthly revenue shows recurring periods of growth and decline throughout the year.
+
+Using these historical trends for demand forecasting can support better inventory planning and promotional strategies.
